@@ -1,5 +1,7 @@
 package edu.bootcamp.backoffice.model.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
@@ -10,6 +12,7 @@ import lombok.Setter;
 @Setter
 //@AllArgsConstructor
 @NoArgsConstructor
+@XmlRootElement
 public class LoginDto {
 
 	@JsonProperty("email")

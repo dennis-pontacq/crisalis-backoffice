@@ -15,6 +15,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UsuarioDto {
 
+	@JsonProperty("id")
+	private Integer id;
+	
 	@JsonProperty("email")
 	private String email;
 	

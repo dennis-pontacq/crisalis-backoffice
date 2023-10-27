@@ -39,6 +39,7 @@ public class Usuario {
 	private String nombre;
 	
 	public Usuario(UsuarioDto dto) {
+		this.id = dto.getId();
 		this.email = dto.getEmail();
 		this.password = dto.getPassword();
 		this.nombre = dto.getNombre();
@@ -47,6 +48,7 @@ public class Usuario {
 	public UsuarioDto toDto() {
 		return UsuarioDto 
 				    .builder()
+				    .id(this.getId())
 					.nombre(this.getNombre())
 					.email(this.getEmail())
 					.password(this.getPassword())

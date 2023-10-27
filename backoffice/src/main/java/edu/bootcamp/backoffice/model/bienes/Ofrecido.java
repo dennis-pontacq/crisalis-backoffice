@@ -1,20 +1,22 @@
-package edu.bootcamp.backoffice.model.pedido;
+package edu.bootcamp.backoffice.model.bienes;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import edu.bootcamp.backoffice.model.bienes.Ofrecido;
-import edu.bootcamp.backoffice.model.bienes.Producto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,44 +24,41 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "pedidoItem")
+@Table(name = "ofrecido")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class PedidoItem {
+public class Ofrecido {
     @Id
     @SequenceGenerator(
-        name = "pedido_item_sequence",
-        sequenceName = "pedido_item_sequence",
+        name = "ofrecido_sequence",
+        sequenceName = "ofrecido_sequence",
         allocationSize = 1,
         initialValue = 1
     )
     @GeneratedValue(
         strategy = GenerationType.SEQUENCE,
-        generator = "pedido_item_sequence"
+        generator = "ofrecido_sequence"
     )
     private Integer id;
 
-    private BigDecimal cantidad;
+    private String nombre;
     private BigDecimal precio;
     
-    @ManyToOne(
-    		fetch = FetchType.LAZY,
-    		optional = false
+    /*
+    @OneToMany(
+    		fetch = FetchType.EAGER,
+    		cascade = CascadeType.ALL
     )
-    @JoinColumn(name = "ofrecido_id")
-    private Ofrecido ofrecido;
+    private Set<PedidoItem>items = new HashSet<>();
+	*/
 
-    
-    @ManyToOne(
-        fetch = FetchType.LAZY,
-        cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-        name = "pedido_id"
-    )
-    private Pedido pedido;
+    /*
+    @ManyToMany(mappedBy = "productos")
+    private List<Cliente> clientes;
+    */
     
 }

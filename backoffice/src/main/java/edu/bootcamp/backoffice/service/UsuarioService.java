@@ -38,6 +38,24 @@ public class UsuarioService {
 		
 	}
 
+	public void remove(Integer id) {
+		
+		this.repo.deleteById(id);
+	
+	}
+	
+	public List<UsuarioDto> filter(String email) {
+
+		List<UsuarioDto> usuarios = this.repo
+										.findAll()
+										.stream()
+										.map(Usuario::toDto)
+										.collect(Collectors.toList());
+		
+		usuarios.removeIf(u->!u.getEmail().contains(email));
+		
+		return usuarios;
+	}
 
 	public List<UsuarioDto> list() {
 		return this.repo
