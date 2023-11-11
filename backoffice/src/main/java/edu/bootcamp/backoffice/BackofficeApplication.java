@@ -23,6 +23,7 @@ import edu.bootcamp.backoffice.model.cliente.Cliente;
 import edu.bootcamp.backoffice.model.cliente.Empresa;
 import edu.bootcamp.backoffice.model.cliente.EmpresaCategoria;
 import edu.bootcamp.backoffice.model.cliente.Persona;
+import edu.bootcamp.backoffice.model.dto.ClienteDto;
 import edu.bootcamp.backoffice.model.pedido.Pedido;
 import edu.bootcamp.backoffice.model.pedido.PedidoItem;
 import edu.bootcamp.backoffice.repository.ClienteRepo;
@@ -66,6 +67,11 @@ public class BackofficeApplication {
 		
 	) {
 		return args -> { 
+			
+			
+		
+			
+			
 			
 			
 			Usuario administrador = usuarioRepo.save(
@@ -118,8 +124,23 @@ public class BackofficeApplication {
 			//cli.add(prod1);
 			
 			cli = cliRepo.save(cli);
-									
-
+			
+			// cli tiene adentro una Persona o una Empresa
+		
+			// Frontend <------------- Backend
+			
+			ClienteDto dto = cli.toDto();
+			
+			// Frontend -------------> Backend
+			
+			if(dto.tipo == "PER") {
+				cli = new Persona(dto);
+			} else {
+				cli = new Empresa(dto);
+			}
+			
+			
+			
 			cli = new Empresa(null, 
 					"Perez y Asoc.", 
 					new Date(),

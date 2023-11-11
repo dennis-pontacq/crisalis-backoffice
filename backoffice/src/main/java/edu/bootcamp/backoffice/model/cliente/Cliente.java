@@ -11,6 +11,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import edu.bootcamp.backoffice.model.dto.ClienteDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,8 +46,30 @@ public abstract class Cliente {
     private Integer id;
 	
 	private String nombre;
-    
-    
+
+	
+	protected Cliente(ClienteDto dto) {
+		this.id = dto.id;
+		this.nombre = dto.nombre;
+		
+	}
+
+	
+	protected abstract ClienteDto completarAtributosEspecificos(ClienteDto dto);
+
+	public ClienteDto toDto() {
+    	
+    	ClienteDto dto = new ClienteDto();
+    	dto.id = id;
+    	dto.nombre = nombre;
+    	
+    	dto = completarAtributosEspecificos(dto);
+    	
+    	return dto; 
+    	
+    }
+	
+	
     /*
     @ManyToMany (
         fetch = FetchType.LAZY

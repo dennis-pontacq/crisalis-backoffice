@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
+import edu.bootcamp.backoffice.model.dto.ClienteDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,11 @@ public class Empresa extends Cliente {
 		this.personas = personas;
 	}
 
+	public Empresa(ClienteDto dto) {
+		super(dto);
+		this.inicioActividad = dto.inicioActividad; 
+	}
+	
 	@Column(name = "fecha_inicio", nullable = true)
     private Date inicioActividad;
     
@@ -77,5 +83,13 @@ public class Empresa extends Cliente {
         }
      )
     private List<Persona> personas = new ArrayList<Persona>(); 
+   
+    
+	@Override
+	protected ClienteDto completarAtributosEspecificos(ClienteDto dto) {
+		dto.inicioActividad = this.inicioActividad;
+		dto.tipo = "EMP";
+		return dto;
+	}
     
 }

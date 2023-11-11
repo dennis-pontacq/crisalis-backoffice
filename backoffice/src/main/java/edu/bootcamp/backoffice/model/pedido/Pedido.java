@@ -59,6 +59,6 @@ public class Pedido {
             cascade = CascadeType.ALL
     )
     private Set<PedidoItem> items = new HashSet<>();
-    
+
 
 }
